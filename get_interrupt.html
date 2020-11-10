@@ -1,0 +1,101 @@
+<script type="text/javascript">
+    RED.nodes.registerType('get_interrupt',{
+        category: 'GPIO Module',
+        color: '#FFFF00',
+        defaults: {
+            name:{value: ""},
+            mapeamento:{ value:"", type: "gpio-mapping" },
+            compare_select:{value:"interval", required:true},
+            minValue:{value: 0 },
+            maxValue:{ value: 0 },
+            qtdGpio:{value:0},
+            controle:{value:0}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "Gpio.svg",
+        label: function() { return this.name? "Get Interrupt - " + this.name:  "Get Interrupt" },
+        paletteLabel: "get Interrupt",
+        oneditprepare: function() {
+            $("#node-input-compare_select").on("change", function(e) {
+                var compare = $(this).val();
+                if (compare === "interval") { $(".node-input-max-value").show(); $(".node-input-min-value").show(); }
+                if (compare === "maxValue") { $(".node-input-max-value").show(); $(".node-input-min-value").hide(); }
+                if (compare === "minValue") { $(".node-input-max-value").hide(); $(".node-input-min-value").show(); }
+            });
+        }
+        
+    });
+</script>
+
+<style>
+    select#node-input-mapeamento { width: 100%; display: block !important; }
+    a#node-input-lookup-mapeamento { position: absolute; right: 0px !important; top: 0px; }
+    label{ width: 100% !important; margin-bottom: 2px !important; }
+    .columm{ display: flex !important; flex-direction: column !important; }
+    .columm-50{ display: flex !important; flex-direction: column !important; width: 50% !important; float: left !important; }
+    .columm-30{ display: flex !important; flex-direction: column !important; width: 30% !important; float: left !important; }
+    .columm-70{ display: flex !important; flex-direction: column !important; width: 70% !important; float: left !important; }
+    hr { width: 40% !important; float: left !important; }
+    .hr-div-get{ display: flex !important; justify-content: space-between !important; margin-top: 250px !important; }
+    .optional{ height: max-content !important; margin-top: 10px !important; }
+    .descript{ text-align: center; }
+    .descript-div{ max-width: 444px !important; }
+    span.red-ui-typedInput-type-label { width: 250px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+    .btn-aln{ display: flex !important; flex-direction: row-reverse !important; align-content: center; align-items: flex-end; }
+</style>    
+
+
+<script type="text/html" data-template-name="get_interrupt">
+    <div class="form-row columm descript-div">
+       <strong class="descript">
+        Assign as input and get the port value.
+        </strong>
+    </div>
+    <div style=" position: relative; display:flex;">
+        <div class="form-row columm-70">
+            <label style="width: 50% !important;" for="node-input-name" ><i class="fa fa-tag"></i> Identification Note</label>
+            <input type="text" id="node-input-name" placeholder="Name" style="width: 100%">
+        </div>
+    </div>
+    <div class="form-row">
+        <label for="node-input-mapeamento"><i class="fa fa-map"></i> PCI Connection Map</label>
+        <input type="text" id="node-input-mapeamento">
+    </div>
+    <div class="hr-div-gp">
+        <hr>
+        <span class="optional">Get Interrupt</span>
+        <hr>
+    </div>
+    <div class="form-row "  style=" position: relative; display:flex;">
+        <div class="form-row columm" style="width: max-content;">
+            <label style=" margin-top: 8px;" for="node-input-compare_select"><i class="icon-tag"></i>Comparison Type:</label>
+            <select id="node-input-compare_select"  style="width: 160px;">
+                <option value="interval">Interval</option>
+                <option value="maxValue">Maximum value (<)</option>
+                <option value="minValue">Minimum value (>)</option>
+            </select>
+        </div>
+
+        <div class="form-row columm-70" style="display: flex; padding-left: 10px;">
+            <div class=box>
+                <div class="node-input-min-value" style="display: none; float: left; margin-right: 35px;">
+                    <div class="columm">
+                        <label  style=" margin-top: 8px;" for="node-input-minValue" style="width: max-content !important;"><i class="icon-tag"></i>Minimum Value: </label>
+                        <input type="number" id="node-input-minValue" style=" width:100px !important ">
+                    </div>
+                </div>
+                <div class="node-input-max-value" style="display: none;">
+                    <div class="columm">
+                        <label  style=" margin-top: 8px;" for="node-input-maxValue" style="width: max-content !important"><i class="icon-tag"></i>Maximum Value: </label>
+                        <input type="number" id="node-input-maxValue" style=" width:100px !important ">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" data-help-name="get_interrupt">
+    <p>Assign as input and get the port value.</p>
+</script>

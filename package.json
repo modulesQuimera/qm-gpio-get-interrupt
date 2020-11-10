@@ -1,0 +1,25 @@
+{
+  "name": "qm-gpio-get-interrupt",
+  "version": "1.0.0",
+  "description": "",
+  "main": "get_interrupt.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/modulesQuimera/qm-gpio-get-interrupt.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/modulesQuimera/qm-gpio-get-interrupt/issues"
+  },
+  "homepage": "https://github.com/modulesQuimera/qm-gpio-get-interrupt#readme",
+  "node-red": {
+		"nodes": {
+			"get_interrupt": "get_interrupt.js"
+		}
+	}
+}
